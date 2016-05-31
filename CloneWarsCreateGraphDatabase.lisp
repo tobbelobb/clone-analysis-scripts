@@ -54,5 +54,9 @@
 
 ;; Cypher query for structural virality of possibly disconnected graph:
 ;;   MATCH p=shortestPath((n1:person)-[:ABILITYTRANSFER*1..13]-(n2:person))
-;;   RETURN 1.0*sum(length(p))/count(p)
+;;   RETURN toFloat(sum(length(p)))/toFloat(count(p))
 ;; Increase 13 if needed.
+;;
+;; Cypher query to get the most active machine part transferers
+;;   MATCH (n1:person)-[rel:ABILITYTRANSFER]->(n2:person)
+;;   RETURN n1,count(rel) ORDER BY count(rel) DESC
