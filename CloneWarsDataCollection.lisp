@@ -61,8 +61,4 @@
   (with-open-file (filestream filename :direction :output :if-exists :append :if-does-not-exist :create)
     (do ((n 1 (incf n)))
       ((= n 552)) ; There were 552 printers in database at the time of writing this code
-      (cl-ppcre:register-groups-bind (id madre pname uname)
-                                     (*all-four-regex*
-                                       (drakma:http-request
-                                         (format nil "http://maytheclonebewithyou.com/index.php/detail?n=~a" n)))
-                                     (format filestream "~a, ~a, ~a, ~a~%" id madre pname uname)))))
+      (clone-data n filestream))))
